@@ -1,0 +1,233 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Experiment.gd" type="Script" id=1]
+[ext_resource path="res://GridContainer.gd" type="Script" id=4]
+
+[sub_resource type="Shader" id=1]
+code = "shader_type canvas_item;
+
+uniform sampler2D texture;
+
+void fragment() {
+	COLOR = texture(texture, UV);
+}"
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = SubResource( 1 )
+
+[node name="Root" type="Node"]
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+custom_constants/separation = 0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Experiment" type="TextureRect" parent="VBoxContainer"]
+visible = false
+margin_right = 1024.0
+margin_bottom = 266.0
+size_flags_vertical = 3
+size_flags_stretch_ratio = 4.0
+expand = true
+script = ExtResource( 1 )
+
+[node name="ColorRect" type="ColorRect" parent="VBoxContainer"]
+material = SubResource( 2 )
+margin_right = 1024.0
+margin_bottom = 462.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 4.0
+
+[node name="Panel" type="Panel" parent="VBoxContainer"]
+margin_top = 462.0
+margin_right = 1024.0
+margin_bottom = 600.0
+rect_min_size = Vector2( 200, 138 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Sprite" type="Sprite" parent="VBoxContainer"]
+
+[node name="Controls" type="VBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 10.0
+margin_right = -10.0
+margin_bottom = -10.0
+alignment = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GridContainer" type="GridContainer" parent="Controls"]
+margin_top = 470.0
+margin_right = 1004.0
+margin_bottom = 566.0
+columns = 3
+script = ExtResource( 4 )
+
+[node name="Label1" type="Label" parent="Controls/GridContainer"]
+margin_top = 1.0
+margin_right = 91.0
+margin_bottom = 15.0
+text = "Wavelength"
+
+[node name="lSlider" type="HSlider" parent="Controls/GridContainer"]
+margin_left = 95.0
+margin_right = 943.0
+margin_bottom = 16.0
+size_flags_horizontal = 3
+min_value = 400.0
+max_value = 700.0
+step = 0.001
+value = 400.0
+
+[node name="Value1" type="Label" parent="Controls/GridContainer"]
+margin_left = 947.0
+margin_top = 1.0
+margin_right = 1004.0
+margin_bottom = 15.0
+text = "  999 nm"
+
+[node name="Label2" type="Label" parent="Controls/GridContainer"]
+margin_top = 21.0
+margin_right = 91.0
+margin_bottom = 35.0
+text = "Slit Width"
+
+[node name="aSlider" type="HSlider" parent="Controls/GridContainer"]
+margin_left = 95.0
+margin_top = 20.0
+margin_right = 943.0
+margin_bottom = 36.0
+size_flags_horizontal = 3
+min_value = 1.0
+max_value = 10.0
+step = 0.001
+value = 1.0
+
+[node name="Value2" type="Label" parent="Controls/GridContainer"]
+margin_left = 947.0
+margin_top = 21.0
+margin_right = 1004.0
+margin_bottom = 35.0
+text = "9 µm"
+align = 2
+
+[node name="Label3" type="Label" parent="Controls/GridContainer"]
+margin_top = 41.0
+margin_right = 91.0
+margin_bottom = 55.0
+text = "Slit Separation"
+
+[node name="dSlider" type="HSlider" parent="Controls/GridContainer"]
+margin_left = 95.0
+margin_top = 40.0
+margin_right = 943.0
+margin_bottom = 56.0
+size_flags_horizontal = 3
+min_value = 1.0
+max_value = 20.0
+step = 0.001
+value = 1.0
+
+[node name="Value3" type="Label" parent="Controls/GridContainer"]
+margin_left = 947.0
+margin_top = 41.0
+margin_right = 1004.0
+margin_bottom = 55.0
+text = "99 µm"
+align = 2
+
+[node name="Label4" type="Label" parent="Controls/GridContainer"]
+margin_top = 61.0
+margin_right = 91.0
+margin_bottom = 75.0
+text = "Photon Flux"
+
+[node name="fSlider" type="HSlider" parent="Controls/GridContainer"]
+margin_left = 95.0
+margin_top = 60.0
+margin_right = 943.0
+margin_bottom = 76.0
+size_flags_horizontal = 3
+min_value = 0.999
+max_value = 20000.0
+step = 0.001
+value = 1.0
+exp_edit = true
+
+[node name="Value4" type="Label" parent="Controls/GridContainer"]
+margin_left = 947.0
+margin_top = 61.0
+margin_right = 1004.0
+margin_bottom = 75.0
+text = "9999 1/s"
+align = 2
+
+[node name="Label5" type="Label" parent="Controls/GridContainer"]
+margin_top = 81.0
+margin_right = 91.0
+margin_bottom = 95.0
+text = "Density"
+
+[node name="sSlider" type="HSlider" parent="Controls/GridContainer"]
+margin_left = 95.0
+margin_top = 80.0
+margin_right = 943.0
+margin_bottom = 96.0
+size_flags_horizontal = 3
+max_value = 4.0
+tick_count = 5
+
+[node name="Value5" type="Label" parent="Controls/GridContainer"]
+margin_left = 947.0
+margin_top = 81.0
+margin_right = 1004.0
+margin_bottom = 95.0
+text = "100 %"
+align = 1
+
+[node name="Buttons" type="HBoxContainer" parent="Controls"]
+margin_top = 570.0
+margin_right = 1004.0
+margin_bottom = 590.0
+alignment = 2
+
+[node name="RandomButton" type="Button" parent="Controls/Buttons"]
+margin_right = 332.0
+margin_bottom = 20.0
+size_flags_horizontal = 3
+text = "Random"
+
+[node name="ResetButton" type="Button" parent="Controls/Buttons"]
+margin_left = 336.0
+margin_right = 668.0
+margin_bottom = 20.0
+size_flags_horizontal = 3
+text = "Reset"
+
+[node name="WhiteButton" type="Button" parent="Controls/Buttons"]
+margin_left = 672.0
+margin_right = 1004.0
+margin_bottom = 20.0
+size_flags_horizontal = 3
+toggle_mode = true
+text = "White"
+
+[connection signal="value_changed" from="Controls/GridContainer/lSlider" to="VBoxContainer/Experiment" method="_on_Wavelength_value_changed"]
+[connection signal="value_changed" from="Controls/GridContainer/aSlider" to="VBoxContainer/Experiment" method="_on_SlitWidth_value_changed"]
+[connection signal="value_changed" from="Controls/GridContainer/dSlider" to="VBoxContainer/Experiment" method="_on_SlitSep_value_changed"]
+[connection signal="value_changed" from="Controls/GridContainer/fSlider" to="VBoxContainer/Experiment" method="_on_Flux_value_changed"]
+[connection signal="value_changed" from="Controls/GridContainer/sSlider" to="VBoxContainer/Experiment" method="_on_sSlider_value_changed"]
+[connection signal="value_changed" from="Controls/GridContainer/sSlider" to="Controls/GridContainer" method="_on_sSlider_value_changed"]
+[connection signal="pressed" from="Controls/Buttons/RandomButton" to="Controls/GridContainer" method="_on_RandomButton_pressed"]
+[connection signal="pressed" from="Controls/Buttons/ResetButton" to="VBoxContainer/Experiment" method="_ready"]
+[connection signal="toggled" from="Controls/Buttons/WhiteButton" to="VBoxContainer/Experiment" method="_on_WhiteButton_toggled"]
